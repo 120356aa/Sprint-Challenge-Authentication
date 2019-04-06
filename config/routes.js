@@ -13,15 +13,15 @@ module.exports = server => {
 const db = require('../database/dbConfig.js');
 
 function register(req, res) {
-  // const auth = req.body;
-  // const hash = bcrypt.hashSync(auth.password, 10);
+  const auth = req.body;
+  const hash = bcrypt.hashSync(auth.password, 10);
 
-  // auth.password = hash;
+  auth.password = hash;
 
-  // db('users')
-  //   .insert(auth)
-  //   .then(ids => res.status(201).json(ids))
-  //   .catch(err => res.status(500).json({message: 'Error'}));
+  db('users')
+    .insert(auth)
+    .then(ids => res.status(201).json(ids))
+    .catch(err => res.status(500).json({message: 'Error'}));
 }
 
 function login(req, res) {
