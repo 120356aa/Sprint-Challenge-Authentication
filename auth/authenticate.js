@@ -30,5 +30,15 @@ function authenticate(req, res, next) {
 }
 
 function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  };
 
+  const secret = jwtKey;
+  const options = {
+    expiresIn: '1d'
+  };
+
+  return jwt.sign(payload, secret, options);
 }
